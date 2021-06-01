@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Find My Slot</string>
+    <string name="find_my_slot">FIND MY SLOT</string>
+    <string name="search_by">Search by:</string>
+    <string name="district">District</string>
+    <string name="find">FIND</string>
+    <string name="Pincode">Pincode</string>
+    <string name="landing_page_image">Landing page image</string>
+    <string name="date">Date</string>
+    <string name="center_name">Center Name</string>
+    <string name="vaccine">Vaccine</string>
+    <string name="slots_available">Slots Available</string>
+    <string name="address">Address</string>>
+</resources>
