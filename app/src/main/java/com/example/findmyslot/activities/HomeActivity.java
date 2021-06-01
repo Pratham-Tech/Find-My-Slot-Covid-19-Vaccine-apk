@@ -1,18 +1,19 @@
 package com.example.findmyslot.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
 import android.annotation.SuppressLint;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 import com.example.findmyslot.R;
 
@@ -22,8 +23,6 @@ public class HomeActivity extends AppCompatActivity{
     private Spinner stateSpinner;
     private Spinner districtSpinner;
     private Button findSlots;
-    private RadioButton pincodeRadio;
-    private RadioButton districtRadio;
     private Boolean ALL_SET = false;
     private int radioId;
 
@@ -68,14 +67,13 @@ public class HomeActivity extends AppCompatActivity{
             validate(radioId);
 
             if(ALL_SET)
-                    startActivity(new Intent(HomeActivity.this,ResultActivity.class));
+                startActivity(new Intent(HomeActivity.this,NoResultActivity.class));
         });
+
     }
 
     private void Initialize(){
 
-        pincodeRadio = findViewById(R.id.radioButton1);
-        districtRadio = findViewById(R.id.radioButton2);
         pincodeText = findViewById(R.id.pincodeInput);
         stateSpinner = findViewById(R.id.listState);
         districtSpinner = findViewById(R.id.listDistrict);
