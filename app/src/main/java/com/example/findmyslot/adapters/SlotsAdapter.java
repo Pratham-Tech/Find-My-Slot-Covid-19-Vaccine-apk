@@ -1,61 +1,68 @@
 package com.example.findmyslot.adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.findmyslot.R;
+import com.example.findmyslot.dataClass.Slots;
+import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
+public class SlotsAdapter extends RecyclerView.Adapter<SlotsAdapter.SlotViewHolder>{
 
-public class SlotsAdapter extends RecyclerView.Adapter<SlotViewHolder>{
+    ArrayList<Slots> slots;
+    Context c;
 
-    ArrayList<String> items;
+    public SlotsAdapter(Context c, ArrayList<Slots> slots) {
 
-    public SlotsAdapter(ArrayList<String> items) {
-
-        this.items = items;
+        this.slots = slots;
+        this.c = c;
     }
     @Override
-    public SlotViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public @NotNull SlotViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.slots_screen,parent,false);
-
+        View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.slots_screen,parent,false);
         return new SlotViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(SlotViewHolder holder, int position) {
 
-        holder.centerName.setText(items.get(position));
-        holder.vaccinationDate.setText(items.get(position));
-        holder.vaccineName.setText(items.get(position));
-        holder.slotAvailable.setText(items.get(position));
-        holder.centerAddress.setText(items.get(position));
+        Slots slot = slots.get(position);
+
+        holder.centerName.setText(slot.getCenterName());
+        holder.vaccinationDate.setText(slot.getDate());
+        holder.vaccineName.setText(slot.getVaccineName());
+        holder.slotAvailable.setText(slot.getBlock_name());
+        holder.centerAddress.setText(slot.getAddress());
     }
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return slots.size();
     }
-}
-class SlotViewHolder extends RecyclerView.ViewHolder{
 
-    TextView vaccinationDate;
-    TextView centerName;
-    TextView vaccineName;
-    TextView slotAvailable;
-    TextView centerAddress;
+    static class SlotViewHolder extends RecyclerView.ViewHolder{
 
-    SlotViewHolder(View v){
-        super(v);
+        TextView vaccinationDate;
+        TextView centerName;
+        TextView vaccineName;
+        TextView slotAvailable;
+        TextView centerAddress;
 
-        vaccinationDate = v.findViewById(R.id.vaccinationDate);
-        centerName = v.findViewById(R.id.centerName);
-        vaccineName = v.findViewById(R.id.vaccineName);
-        slotAvailable = v.findViewById(R.id.slotsAvailable);
-        centerAddress = v.findViewById(R.id.centerAddress);
+        SlotViewHolder(View v){
+            super(v);
 
+            vaccinationDate = v.findViewById(R.id.vaccinationDate);
+            centerName = v.findViewById(R.id.centerName);
+            vaccineName = v.findViewById(R.id.vaccineName);
+            slotAvailable = v.findViewById(R.id.slotsAvailable);
+            centerAddress = v.findViewById(R.id.centerAddress);
+
+        }
     }
-}
 
+}

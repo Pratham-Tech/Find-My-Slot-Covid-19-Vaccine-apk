@@ -24,14 +24,12 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        new Handler().postDelayed(new Runnable(){
-             public void run(){
+        new Handler().postDelayed(() -> {
 
-                 Intent intent = new Intent(MainActivity.this,HomeActivity.class);
+            Intent intent = new Intent(MainActivity.this,HomeActivity.class);
 
-                 startActivity(intent);
-                 finish();
-             }
-             },2000);
+            startActivity(intent);
+            finish();
+        },1000);
     }
 }
