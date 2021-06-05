@@ -3,6 +3,8 @@ package com.example.findmyslot.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.Toast;
 import com.android.volley.Request;
@@ -14,11 +16,16 @@ import com.example.findmyslot.dataClass.Slots;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ResultActivity extends AppCompatActivity {
 
     private RecyclerView myView;
+    private SlotsAdapter adapter;
+    private String url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,15 +36,26 @@ public class ResultActivity extends AppCompatActivity {
         myView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
         ArrayList<Slots> slot = fetch_data();
-        SlotsAdapter adapter = new SlotsAdapter(getApplicationContext(), slot);
+        adapter = new SlotsAdapter(getApplicationContext(), slot);
         myView.setAdapter(adapter);
     }
 
 
     ArrayList<Slots> fetch_data(){
 
-        String url = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByPin?pincode="+
-                getIntent().getStringExtra("input") +"&date=4-06-2021";
+        String date;
+        @SuppressLint("SimpleDateFormat") DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        date = format.format(new Date());
+
+        String type = getIntent().getStringExtra("type");
+
+        if(type.equals("pincode"))
+            url = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByPin?pincode="+
+                    getIntent().getStringExtra("input")+"&date="+date;
+        if(type.equals("district"))
+            url = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id="+
+                    getIntent().getStringExtra("input")+"&date="+date;
+
 
         ArrayList<Slots> slotItems = new ArrayList<>();
 
@@ -51,25 +69,12 @@ public class ResultActivity extends AppCompatActivity {
                 for (int i = 0; i < array.length(); i++) {
 
                     JSONObject slot = array.getJSONObject(i);
-
-                    String center,date,address,vaccine;
-                    String slots;
-
-                    center = slot.getString("name");
-                    date = slot.getString("date");
-                    address = slot.getString("address");
-                    vaccine = slot.getString("vaccine");
-                    slots = slot.getString("block_name");
-
-                    //Toast.makeText(getApplicationContext(),slots,Toast.LENGTH_SHORT).show();
-
-                    Slots s = new Slots();
-                    s.setAddress(address);
-                    s.setCenterName(center);
-                    s.setDate(date);
-                    s.setBlock_name(slots);
-                    s.setVaccineName(vaccine);
-                    slotItems.add(s);
+                    slotItems.add(new Slots(slot.getString("name"),
+                                                   slot.getString("date"),
+                                                   slot.getString("vaccine"),
+                                                   slot.getString("address"),
+                                                   slot.getString("available_capacity")));
+                    adapter.notifyDataSetChanged();
                 }
             }
             catch (JSONException e) {

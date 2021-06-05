@@ -3,25 +3,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="5dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="20sp">
+    android:padding="12sp">
 
 
     <TextView
         android:id="@+id/nameView"
-        android:layout_width="150dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:text="@string/center_name"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/dateView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/date"
+        android:layout_marginTop="5dp"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/nameView"/>
@@ -32,6 +34,7 @@
         android:layout_height="wrap_content"
         android:text="@string/vaccine"
         android:textSize="20sp"
+        android:layout_marginTop="5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/dateView"/>
 
@@ -41,6 +44,7 @@
         android:layout_height="wrap_content"
         android:text="@string/slots_available"
         android:textSize="20sp"
+        android:layout_marginTop="5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/vaccineView"/>
 
@@ -48,16 +52,19 @@
         android:id="@+id/addressView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="@string/address"
         android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/slotView"/>
+        app:layout_constraintTop_toBottomOf="@id/slotView" />
 
     <TextView
         android:id="@+id/centerName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Demo Center"
+        android:text=""
+        android:layout_marginTop="5dp"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -66,7 +73,8 @@
         android:id="@+id/vaccinationDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Demo Date"
+        android:text=""
+        android:layout_marginTop="5dp"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/centerName"/>
@@ -75,7 +83,8 @@
         android:id="@+id/vaccineName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Demo Vaccine"
+        android:text=""
+        android:layout_marginTop="5dp"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/vaccinationDate"/>
@@ -84,7 +93,8 @@
         android:id="@+id/slotsAvailable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Demo Slots"
+        android:text=""
+        android:layout_marginTop="5dp"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/vaccineName" />
@@ -93,9 +103,16 @@
         android:id="@+id/centerAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Demo Address"
+        android:layout_marginTop="8dp"
+        android:inputType="textMultiLine"
+        android:text=""
+        android:background="@color/cardview_dark_background"
+        android:textAlignment="center"
         android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/slotsAvailable"/>
+        app:layout_constraintTop_toBottomOf="@id/addressView"
+        tools:ignore="TextViewEdits" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

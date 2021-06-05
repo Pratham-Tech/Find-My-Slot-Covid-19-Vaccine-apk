@@ -10,6 +10,7 @@ import com.example.findmyslot.R;
 import com.example.findmyslot.dataClass.Slots;
 import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
+
 public class SlotsAdapter extends RecyclerView.Adapter<SlotsAdapter.SlotViewHolder>{
 
     ArrayList<Slots> slots;
@@ -36,7 +37,7 @@ public class SlotsAdapter extends RecyclerView.Adapter<SlotsAdapter.SlotViewHold
         holder.centerName.setText(slot.getCenterName());
         holder.vaccinationDate.setText(slot.getDate());
         holder.vaccineName.setText(slot.getVaccineName());
-        holder.slotAvailable.setText(slot.getBlock_name());
+        holder.slotAvailable.setText(slot.getSlotsAvailable());
         holder.centerAddress.setText(slot.getAddress());
     }
 

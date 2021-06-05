@@ -11,7 +11,7 @@
     <string name="center_name">Center Name</string>
     <string name="vaccine">Vaccine</string>
     <string name="slots_available">Slots Available</string>
-    <string name="address">Address</string>
+    <string name="address">Address :</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="no_slots_available_currently">No slots available currently</string>>
@@ -57,6 +57,12 @@
         <item>Uttrakhand</item>
         <item>West Bengal</item>
         <item>Daman and Diu</item>
+
+    </string-array>
+
+    <string-array name="district">
+
+        <item>Select District</item>
 
     </string-array>
 
