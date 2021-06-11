@@ -15,7 +15,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.Hashtable;
 import tech.pratham.findmyslot.R;
-
 import static tech.pratham.findmyslot.R.id.radioButton1;
 import static tech.pratham.findmyslot.R.id.radioButton2;
 

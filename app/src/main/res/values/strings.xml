@@ -17,8 +17,11 @@
     <string name="no_slots_available_currently">No slots available currently</string>
     <string name="enter_pincode_here">Pincode</string>
     <string name="showing_results_for">Showing results for</string>
-    <string name="_1_dose_2">:1 DOSE 2:</string>
-    <string name="todo">TODO</string>>
+    <string name="doseView1">DOSE 1:</string>
+    <string name="doseView2">DOSE 2:</string>
+    <string name="todo">TODO</string>
+    <string name="book">Book Now</string>
+    <string name="refresh">Refresh</string>
 
 
     <string-array name="states">

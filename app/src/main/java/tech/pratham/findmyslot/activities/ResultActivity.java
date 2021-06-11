@@ -1,14 +1,18 @@
 package tech.pratham.findmyslot.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import tech.pratham.findmyslot.R;
 import tech.pratham.findmyslot.adapters.SlotsAdapter;
 import tech.pratham.findmyslot.dataClass.MySingleton;
@@ -26,6 +30,9 @@ public class ResultActivity extends AppCompatActivity {
     private RecyclerView myView;
     private SlotsAdapter adapter;
     private String url;
+    private TextView dateView;
+    private FloatingActionButton actionButton;
+    private FloatingActionButton bookActionBT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +48,21 @@ public class ResultActivity extends AppCompatActivity {
 
             adapter = new SlotsAdapter(getApplicationContext(), slot);
             myView.setAdapter(adapter);
+
+            actionButton.setOnClickListener(v->{
+
+                ArrayList<Slots> refreshSlots = fetch_data();
+                adapter = new SlotsAdapter(getApplicationContext(),refreshSlots);
+                myView.setAdapter(adapter);
+            });
+
+            bookActionBT.setOnClickListener(v->{
+
+                String url = "https://selfregistration.cowin.gov.in/";
+                CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+                CustomTabsIntent customTabsIntent = builder.build();
+                customTabsIntent.launchUrl(this, Uri.parse(url));
+            });
     }
 
     ArrayList<Slots> fetch_data(){
@@ -49,6 +71,7 @@ public class ResultActivity extends AppCompatActivity {
         @SuppressLint("SimpleDateFormat") DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         date = format.format(new Date());
 
+        dateView.setText(date);
         String type = getIntent().getStringExtra("type");
 
         if(type.equals("pincode"))
@@ -68,17 +91,22 @@ public class ResultActivity extends AppCompatActivity {
                 JSONObject object = new JSONObject(response);
                 JSONArray array = object.getJSONArray("sessions");
 
-                for (int i = 0; i < array.length(); i++) {
 
-                    JSONObject slot = array.getJSONObject(i);
+                if(array.length()==0)
+                    startActivity(new Intent(ResultActivity.this, NoResultActivity.class));
+                else {
+                    for (int i = 0; i < array.length(); i++) {
 
-                    slotItems.add(new Slots(slot.getString("name"),
-                                      slot.getString("vaccine"),
-                                      slot.getString("address"),
-                                      slot.getString("available_capacity_dose1"),
-                                      slot.getString("available_capacity_dose2")));
+                        JSONObject slot = array.getJSONObject(i);
 
-                    adapter.notifyDataSetChanged();
+                        slotItems.add(new Slots(slot.getString("name"),
+                                slot.getString("vaccine"),
+                                slot.getString("address"),
+                                slot.getString("available_capacity_dose1"),
+                                slot.getString("available_capacity_dose2")));
+
+                        adapter.notifyDataSetChanged();
+                    }
                 }
             }
             catch (JSONException e) {
@@ -96,5 +124,8 @@ public class ResultActivity extends AppCompatActivity {
     private void Initialize(){
 
         myView = findViewById(R.id.recyclerView);
+        actionButton = findViewById(R.id.actionBT);
+        dateView = findViewById(R.id.vaccinationDate);
+        bookActionBT = findViewById(R.id.bookActionBT);
     }
 }

@@ -1,8 +1,69 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <string name="app_name">Find My Slot</string>
     <string name="find_my_slot">FIND MY SLOT</string>
+    <string name="search_by">Find by:</string>
+    <string name="district">District</string>
+    <string name="find">FIND</string>
+    <string name="Pincode">Pincode</string>
+    <string name="landing_page_image">Landing page image</string>
+    <string name="date">Date</string>
+    <string name="center_name">Center Name</string>
+    <string name="vaccine">Vaccine</string>
+    <string name="slots_available">Slots Available</string>
+    <string name="address">Address :</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="no_slots_available_currently">No slots available currently</string>
     <string name="enter_pincode_here">Pincode</string>
     <string name="showing_results_for">Showing results for</string>
-    <string name="_1_dose_2">:1 DOSE 2:</string>
+    <string name="doseView1">DOSE 1:</string>
+    <string name="doseView2">DOSE 2:</string>
     <string name="todo">TODO</string>
+    <string name="book">Book Now</string>
+    <string name="refresh">Refresh</string>
+
+
+    <string-array name="states">
+
+        <item>Select State</item>
+        <item>Andaman and Nicobar Islands</item>
+        <item>Andhra Pradesh</item>
+        <item>Arunachal Pradesh</item>
+        <item>Assam</item>
+        <item>Bihar</item>
+        <item>Chandigarh</item>
+        <item>Chhattisgarh</item>
+        <item>Dadar and Nagar Haveli</item>
+        <item>Delhi</item>
+        <item>Goa</item>
+        <item>Gujarat</item>
+        <item>Haryana</item>
+        <item>Himachal Pradesh</item>
+        <item>Jammu and Kashmir</item>
+        <item>Jharkhand</item>
+        <item>Karnataka</item>
+        <item>Kerala</item>
+        <item>Ladakh</item>
+        <item>Lakshadweep</item>
+        <item>Madhya Pradesh</item>
+        <item>Maharashtra</item>
+        <item>Manipur</item>
+        <item>Meghalaya</item>
+        <item>Mizoram</item>
+        <item>Nagaland</item>
+        <item>Odisha</item>
+        <item>Puducherry</item>
+        <item>Punjab</item>
+        <item>Rajashthan</item>
+        <item>Sikkim</item>
+        <item>Tamil Nadu</item>
+        <item>Telangana</item>
+        <item>Tripura</item>
+        <item>Uttar Pradesh</item>
+        <item>Uttrakhand</item>
+        <item>West Bengal</item>
+        <item>Daman and Diu</item>
+
+    </string-array>
 </resources>

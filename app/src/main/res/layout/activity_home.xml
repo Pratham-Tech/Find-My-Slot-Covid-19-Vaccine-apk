@@ -20,7 +20,6 @@
        android:layout_height="230dp"
        android:layout_gravity="center"
        android:layout_marginTop="30dp"
-       android:alpha=".50"
        android:src="@drawable/findmyslot"
        android:contentDescription="@string/landing_page_image" />
 
