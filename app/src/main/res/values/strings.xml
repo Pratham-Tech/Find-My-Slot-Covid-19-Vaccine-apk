@@ -2,7 +2,7 @@
 
     <string name="app_name">Find My Slot</string>
     <string name="find_my_slot">FIND MY SLOT</string>
-    <string name="search_by">Search by:</string>
+    <string name="search_by">Find by:</string>
     <string name="district">District</string>
     <string name="find">FIND</string>
     <string name="Pincode">Pincode</string>
@@ -14,7 +14,11 @@
     <string name="address">Address :</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="no_slots_available_currently">No slots available currently</string>>
+    <string name="no_slots_available_currently">No slots available currently</string>
+    <string name="enter_pincode_here">Pincode</string>
+    <string name="showing_results_for">Showing results for</string>
+    <string name="_1_dose_2">:1 DOSE 2:</string>
+    <string name="todo">TODO</string>>
 
 
     <string-array name="states">
@@ -59,11 +63,4 @@
         <item>Daman and Diu</item>
 
     </string-array>
-
-    <string-array name="district">
-
-        <item>Select District</item>
-
-    </string-array>
-
 </resources>

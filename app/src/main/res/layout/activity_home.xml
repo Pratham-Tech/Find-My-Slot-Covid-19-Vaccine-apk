@@ -1,119 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:background="@drawable/gradient_back2"
+    android:fillViewport="true">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="5sp">
 
    <ImageView
        android:id="@+id/imgView"
-       android:layout_width="350dp"
-       android:layout_height="220dp"
+       android:layout_width="250dp"
+       android:layout_height="230dp"
+       android:layout_gravity="center"
        android:layout_marginTop="30dp"
-       android:background="@drawable/home"
-       app:layout_constraintEnd_toEndOf="parent"
-       app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintTop_toTopOf="parent"
+       android:alpha=".50"
+       android:src="@drawable/findmyslot"
        android:contentDescription="@string/landing_page_image" />
 
    <TextView
        android:id="@+id/txtView"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
-       android:layout_marginTop="16dp"
+       android:layout_marginBottom="-80dp"
        android:padding="10sp"
        android:text="@string/search_by"
-       android:textSize="25sp"
-       app:layout_constraintEnd_toEndOf="parent"
-       app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintTop_toBottomOf="@id/imgView" />
+       android:textStyle="bold"
+       android:textColor="#008BE3"
+       android:textSize="35sp"
+       android:layout_gravity="center"
+       android:layout_marginTop="25dp"
+       />
 
    <RadioGroup
        android:id="@+id/radioGrp"
        android:layout_width="match_parent"
-       android:layout_height="100dp"
-       android:layout_marginTop="10dp"
-       android:background="#32a6a8"
+       android:layout_height="80dp"
        android:orientation="horizontal"
-       android:padding="30dp"
-       app:layout_constraintEnd_toEndOf="parent"
-       app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintTop_toBottomOf="@id/txtView">
+       android:layout_gravity="center"
+       android:layout_marginTop="100dp"
+       >
 
       <RadioButton
           android:id="@+id/radioButton1"
           android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginStart="50dp"
-          android:layout_marginEnd="40dp"
-          android:padding="10sp"
+          android:layout_height="match_parent"
           android:text="@string/Pincode"
-          android:textColor="@color/white"
-          android:textSize="15sp" />
+          android:textColor="#009ECE"
+          android:textSize="20sp"
+          android:textAlignment="center"
+          android:layout_marginStart="60dp"
+         />
 
       <RadioButton
           android:id="@+id/radioButton2"
           android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginEnd="50dp"
-          android:padding="10sp"
+          android:layout_height="match_parent"
+          android:textAlignment="center"
           android:text="@string/district"
-          android:textColor="@color/white"
-          android:textSize="15sp" />
+          android:textColor="#009ECE"
+          android:textSize="20sp"
+          android:layout_marginStart="50dp"
+          />
 
    </RadioGroup>
 
    <EditText
        android:id="@+id/pincodeInput"
-       android:layout_width="150dp"
+       android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:inputType="number"
        android:maxLength="6"
+       android:textColor="#008BE3"
+       android:textColorHint="#008BE3"
        android:textAlignment="center"
-       android:textSize="30sp"
-       app:layout_constraintBottom_toTopOf="@id/findSlots"
-       app:layout_constraintEnd_toEndOf="parent"
-       app:layout_constraintHorizontal_bias="0.501"
-       app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintTop_toBottomOf="@id/radioGrp"
-       app:layout_constraintVertical_bias="0.496" />
+       android:textSize="25sp"
+       android:layout_gravity="center"
+       android:layout_marginTop="40dp"
+       android:layout_marginBottom="12dp"
+       android:hint="@string/enter_pincode_here"
+       android:autofillHints="" />
 
    <Spinner
-       android:layout_width="170dp"
-       android:layout_height="50dp"
+       android:layout_width="150dp"
+       android:layout_height="wrap_content"
        android:id="@+id/listState"
-       android:layout_marginTop="60dp"
-       app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintEnd_toEndOf="parent"
-       app:layout_constraintBottom_toBottomOf="@+id/listDistrict"
-       app:layout_constraintTop_toTopOf="@id/radioGrp"/>
+       android:layout_gravity="center"
+       android:layout_marginTop="-90dp"/>
 
    <Spinner
        android:id="@+id/listDistrict"
-       android:layout_width="170dp"
-       android:layout_height="50dp"
-       android:layout_marginTop="30dp"
-       android:layout_marginBottom="100dp"
-       app:layout_constraintBottom_toBottomOf="@id/findSlots"
-       app:layout_constraintEnd_toEndOf="parent"
-       app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintTop_toBottomOf="@+id/listState" />
+       android:layout_width="150dp"
+       android:layout_height="wrap_content"
+       android:layout_gravity="center"
+       android:layout_marginTop="18dp"/>
 
    <Button
-       android:layout_width="150dp"
+       android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:id="@+id/findSlots"
        android:text="@string/find"
-       android:textSize="20sp"
+       android:textSize="25sp"
        android:fontFamily="sans-serif-condensed"
-       android:background="#32a6a8"
-       android:textColor="@color/white"
+       android:textColor="#009ECE"
        android:textAlignment="center"
-       android:padding="10sp"
-       app:layout_constraintBottom_toBottomOf="parent"
-       app:layout_constraintTop_toBottomOf="@id/listDistrict"
-       app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintEnd_toEndOf="parent"/>
+       android:background="#D0EAFE"
+       android:textStyle="bold"
+       android:layout_gravity="center"
+       android:textColorHighlight="@color/statusBar"
+       android:layout_marginTop="40dp"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+   </LinearLayout>
+</ScrollView>

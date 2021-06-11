@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.findmyslot">
+    package="tech.pratham.findmyslot">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/splash"
+        android:icon="@drawable/findmyslot"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FindMySlot">
-        <activity android:name=".activities.NoResultActivity"></activity>
-        <activity android:name=".activities.ResultActivity" />
-        <activity android:name=".activities.HomeActivity" />
-        <activity android:name=".activities.MainActivity">
+        <activity android:name="tech.pratham.findmyslot.activities.NoResultActivity" />
+        <activity android:name="tech.pratham.findmyslot.activities.ResultActivity" />
+        <activity android:name="tech.pratham.findmyslot.activities.HomeActivity" />
+        <activity android:name="tech.pratham.findmyslot.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

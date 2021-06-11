@@ -4,37 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.MainActivity">
+    android:background="@color/white"
+    tools:context="tech.pratham.findmyslot.activities.MainActivity">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/white"
-        app:layout_constraintVertical_bias="1.0">
-
-        <TextView
-            android:id="@+id/txtView"
-            android:layout_width="match_parent"
-            android:layout_height="80sp"
-            android:layout_marginVertical="50dp"
-            android:background="#32a6a8"
-            android:padding="15sp"
-            android:text="@string/find_my_slot"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="45sp"
-            android:fontFamily="serif-monospace"/>
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="450dp"
-            android:layout_height="500dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginVertical="150dp"
-            android:src="@drawable/splash"
-            tools:ignore="MissingConstraints" />
-    </FrameLayout>
+            android:src="@drawable/findmyslot"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

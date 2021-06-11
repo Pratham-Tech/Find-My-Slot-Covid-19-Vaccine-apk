@@ -6,7 +6,7 @@ android {
     compileSdkVersion 30
 
     defaultConfig {
-        applicationId "com.example.findmyslot"
+        applicationId "tech.pratham.findmyslot"
         minSdkVersion 25
         targetSdkVersion 30
         versionCode 1
