@@ -21,6 +21,16 @@
     <string name="doseView2">DOSE 2:</string>
     <string name="todo">TODO</string>
     <string name="book">Book Now</string>
+    <string name="min_age">Min. Age :</string>
+    <string name="sputnik_v">Sputnik V</string>
+    <string name="covishield">Covishield</string>
+    <string name="covaxin">Covaxin</string>
+    <string name="vaccine_type">Vaccine type :</string>
+    <string name="dateFormat">dd-MM-yyyy</string>
+    <string name="_18">18+</string>
+    <string name="_45">45+</string>
+    <string name="age">Age :</string>
+    <string name="book_now">Book Now</string>
     <string name="refresh">Refresh</string>
 
 

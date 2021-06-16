@@ -5,7 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+
 import java.util.Objects;
+
 import tech.pratham.findmyslot.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -19,9 +24,12 @@ public class MainActivity extends AppCompatActivity {
         int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
-        getSupportActionBar().hide();
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         setContentView(R.layout.activity_main);
+
+        MobileAds.initialize(this, initializationStatus -> {
+        });
 
         new Handler().postDelayed(() -> {
 
@@ -29,6 +37,6 @@ public class MainActivity extends AppCompatActivity {
 
             startActivity(intent);
             finish();
-        },800);
+        },500);
     }
 }

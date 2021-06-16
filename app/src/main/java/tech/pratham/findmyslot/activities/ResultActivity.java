@@ -5,14 +5,14 @@ import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import tech.pratham.findmyslot.R;
 import tech.pratham.findmyslot.adapters.SlotsAdapter;
 import tech.pratham.findmyslot.dataClass.MySingleton;
@@ -21,58 +21,81 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 public class ResultActivity extends AppCompatActivity {
 
     private RecyclerView myView;
     private SlotsAdapter adapter;
-    private String url;
+    private ArrayList<Slots> refreshSlots;
     private TextView dateView;
-    private FloatingActionButton actionButton;
-    private FloatingActionButton bookActionBT;
+    private Button bookBt;
+    private Button refreshBt;
+    private ImageButton nextBt;
+    private ImageButton backBt;
+    @SuppressLint("SimpleDateFormat")
+    private final DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+    private String date = format.format(new Date());
+    private String url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getSupportActionBar().hide();
+        Objects.requireNonNull(getSupportActionBar()).hide();
         setContentView(R.layout.activity_result);
 
         Initialize();
         myView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
-        ArrayList<Slots> slot = fetch_data();
+        ArrayList<Slots> slot = fetch_data(date);
 
             adapter = new SlotsAdapter(getApplicationContext(), slot);
             myView.setAdapter(adapter);
 
-            actionButton.setOnClickListener(v->{
+            refreshBt.setOnClickListener(v->{
 
-                ArrayList<Slots> refreshSlots = fetch_data();
+                refreshSlots = fetch_data(date);
                 adapter = new SlotsAdapter(getApplicationContext(),refreshSlots);
                 myView.setAdapter(adapter);
             });
 
-            bookActionBT.setOnClickListener(v->{
+            bookBt.setOnClickListener(v->{
 
                 String url = "https://selfregistration.cowin.gov.in/";
                 CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
                 CustomTabsIntent customTabsIntent = builder.build();
                 customTabsIntent.launchUrl(this, Uri.parse(url));
             });
-    }
 
-    ArrayList<Slots> fetch_data(){
+            nextBt.setOnClickListener(v ->{
 
-        String date;
-        @SuppressLint("SimpleDateFormat") DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-        date = format.format(new Date());
+                date = IncrementDate();
+                refreshSlots = fetch_data(date);
+                adapter = new SlotsAdapter(getApplicationContext(),refreshSlots);
+                myView.setAdapter(adapter);
+            });
+
+            backBt.setOnClickListener(v ->{
+
+                date = DecrementDate();
+                refreshSlots = fetch_data(date);
+                adapter = new SlotsAdapter(getApplicationContext(),refreshSlots);
+                myView.setAdapter(adapter);
+            });
+        }
+
+    ArrayList<Slots> fetch_data(String date){
 
         dateView.setText(date);
         String type = getIntent().getStringExtra("type");
+        String[] vaccineType = getIntent().getStringArrayExtra("vaccine");
+        int age = getIntent().getIntExtra("age",18);
 
         if(type.equals("pincode"))
             url = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByPin?pincode="+
@@ -91,24 +114,142 @@ public class ResultActivity extends AppCompatActivity {
                 JSONObject object = new JSONObject(response);
                 JSONArray array = object.getJSONArray("sessions");
 
-
-                if(array.length()==0)
-                    startActivity(new Intent(ResultActivity.this, NoResultActivity.class));
-                else {
                     for (int i = 0; i < array.length(); i++) {
 
                         JSONObject slot = array.getJSONObject(i);
 
-                        slotItems.add(new Slots(slot.getString("name"),
-                                slot.getString("vaccine"),
-                                slot.getString("address"),
-                                slot.getString("available_capacity_dose1"),
-                                slot.getString("available_capacity_dose2")));
+                        if(!slot.getString("available_capacity").equals("0")) {
 
-                        adapter.notifyDataSetChanged();
+                            if (vaccineType[0].equals("") && vaccineType[1].equals("") && vaccineType[2].equals("")) {
+
+                                if (slot.getInt("min_age_limit") == age) {
+                                    slotItems.add(new Slots(slot.getString("name"),
+                                            slot.getString("vaccine"),
+                                            slot.getString("address"),
+                                            slot.getString("available_capacity_dose1"),
+                                            slot.getString("available_capacity_dose2"),
+                                            slot.getString("fee_type"),
+                                            slot.getString("min_age_limit")));
+
+                                    adapter.notifyDataSetChanged();
+                                }
+                            }
+                            if (vaccineType[0].equals("Covaxin") && vaccineType[1].equals("Covishield") && vaccineType[2].equals("Sputnik V")) {
+
+                                if (slot.getInt("min_age_limit") == age) {
+                                    slotItems.add(new Slots(slot.getString("name"),
+                                            slot.getString("vaccine"),
+                                            slot.getString("address"),
+                                            slot.getString("available_capacity_dose1"),
+                                            slot.getString("available_capacity_dose2"),
+                                            slot.getString("fee_type"),
+                                            slot.getString("min_age_limit")));
+
+                                    adapter.notifyDataSetChanged();
+                                }
+                            }
+                            if (vaccineType[0].equals("Covaxin") && vaccineType[1].equals("") && vaccineType[2].equals("")) {
+
+                                if (slot.getString("vaccine").equals("COVAXIN") &&
+                                        slot.getInt("min_age_limit") == age) {
+
+                                    slotItems.add(new Slots(slot.getString("name"),
+                                            slot.getString("vaccine"),
+                                            slot.getString("address"),
+                                            slot.getString("available_capacity_dose1"),
+                                            slot.getString("available_capacity_dose2"),
+                                            slot.getString("fee_type"),
+                                            slot.getString("min_age_limit")));
+
+                                    adapter.notifyDataSetChanged();
+                                }
+                            }
+                            if (vaccineType[0].equals("") && vaccineType[1].equals("Covishield") && vaccineType[2].equals("")) {
+
+                                if (slot.getString("vaccine").equals("COVISHIELD") &&
+                                        slot.getInt("min_age_limit") == age) {
+
+                                    slotItems.add(new Slots(slot.getString("name"),
+                                            slot.getString("vaccine"),
+                                            slot.getString("address"),
+                                            slot.getString("available_capacity_dose1"),
+                                            slot.getString("available_capacity_dose2"),
+                                            slot.getString("fee_type"),
+                                            slot.getString("min_age_limit")));
+
+                                    adapter.notifyDataSetChanged();
+                                }
+                            }
+                            if (vaccineType[0].equals("") && vaccineType[1].equals("") && vaccineType[2].equals("Sputnik V")) {
+
+                                if (slot.getString("vaccine").equals("SPUTNIK V") &&
+                                        slot.getInt("min_age_limit") == age) {
+
+                                    slotItems.add(new Slots(slot.getString("name"),
+                                            slot.getString("vaccine"),
+                                            slot.getString("address"),
+                                            slot.getString("available_capacity_dose1"),
+                                            slot.getString("available_capacity_dose2"),
+                                            slot.getString("fee_type"),
+                                            slot.getString("min_age_limit")));
+
+                                    adapter.notifyDataSetChanged();
+                                }
+                            }
+                            if (vaccineType[0].equals("Covaxin") && vaccineType[1].equals("Covishield") && vaccineType[2].equals("")) {
+
+                                if ((slot.getString("vaccine").equals("COVAXIN") ||
+                                        slot.getString("vaccine").equals("COVISHIELD"))&&
+                                                slot.getInt("min_age_limit") == age) {
+
+                                    slotItems.add(new Slots(slot.getString("name"),
+                                            slot.getString("vaccine"),
+                                            slot.getString("address"),
+                                            slot.getString("available_capacity_dose1"),
+                                            slot.getString("available_capacity_dose2"),
+                                            slot.getString("fee_type"),
+                                            slot.getString("min_age_limit")));
+
+                                    adapter.notifyDataSetChanged();
+                                }
+                            }
+                            if (vaccineType[0].equals("") && vaccineType[1].equals("Covishield") && vaccineType[2].equals("Sputnik V")) {
+
+                                if ((slot.getString("vaccine").equals("COVISHIELD") ||
+                                        slot.getString("vaccine").equals("SPUTNIK V")) &&
+                                                slot.getInt("min_age_limit") == age) {
+
+                                    slotItems.add(new Slots(slot.getString("name"),
+                                            slot.getString("vaccine"),
+                                            slot.getString("address"),
+                                            slot.getString("available_capacity_dose1"),
+                                            slot.getString("available_capacity_dose2"),
+                                            slot.getString("fee_type"),
+                                            slot.getString("min_age_limit")));
+
+                                    adapter.notifyDataSetChanged();
+                                }
+                            }
+                            if (vaccineType[0].equals("Covaxin") && vaccineType[1].equals("") && vaccineType[2].equals("Sputnik V")) {
+
+                                if ((slot.getString("vaccine").equals("COVAXIN") ||
+                                        slot.getString("vaccine").equals("SPUTNIK V")) &&
+                                                slot.getInt("min_age_limit") == age) {
+
+                                    slotItems.add(new Slots(slot.getString("name"),
+                                            slot.getString("vaccine"),
+                                            slot.getString("address"),
+                                            slot.getString("available_capacity_dose1"),
+                                            slot.getString("available_capacity_dose2"),
+                                            slot.getString("fee_type"),
+                                            slot.getString("min_age_limit")));
+
+                                    adapter.notifyDataSetChanged();
+                                }
+                            }
+                        }
                     }
                 }
-            }
             catch (JSONException e) {
 
                 Toast.makeText(getApplicationContext(),"Sorry",Toast.LENGTH_SHORT).show();
@@ -121,11 +262,44 @@ public class ResultActivity extends AppCompatActivity {
         return slotItems;
     }
 
+    private String IncrementDate(){
+
+        String newDate;
+
+        Calendar c = Calendar.getInstance();
+        try {
+            c.setTime(Objects.requireNonNull(format.parse(date)));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        c.add(Calendar.DATE, 1);  // number of days to add
+        newDate = format.format(c.getTime());
+
+        return newDate;
+    }
+
+    private String DecrementDate(){
+
+        String newDate;
+
+        Calendar c = Calendar.getInstance();
+        try {
+            c.setTime(Objects.requireNonNull(format.parse(date)));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        c.add(Calendar.DATE, -1);  // number of days to decrement
+        newDate = format.format(c.getTime());
+
+        return newDate;
+    }
     private void Initialize(){
 
         myView = findViewById(R.id.recyclerView);
-        actionButton = findViewById(R.id.actionBT);
         dateView = findViewById(R.id.vaccinationDate);
-        bookActionBT = findViewById(R.id.bookActionBT);
+        bookBt = findViewById(R.id.bookBT);
+        refreshBt = findViewById(R.id.refreshBT);
+        nextBt = findViewById(R.id.nextBt);
+        backBt = findViewById(R.id.backBt);
     }
 }

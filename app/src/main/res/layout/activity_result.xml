@@ -12,11 +12,10 @@
         android:layout_height="wrap_content"
         android:id="@+id/backBt"
         android:layout_marginTop="2dp"
-        android:layout_marginStart="4dp"
         android:background="@drawable/back_bt"
-
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/vaccinationDate"
         android:contentDescription="@string/todo" />
 
     <ImageButton
@@ -25,7 +24,7 @@
         android:id="@+id/nextBt"
         android:background="@drawable/next_bt"
         android:layout_marginTop="2dp"
-        android:layout_marginEnd="1dp"
+        app:layout_constraintStart_toEndOf="@id/vaccinationDate"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:contentDescription="@string/todo" />
@@ -46,60 +45,37 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="2dp"
+        app:layout_constraintBottom_toTopOf="@id/refreshBT"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/vaccinationDate"
         tools:listitem="@layout/slots_screen" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/actionBT"
+    <Button
+        android:id="@+id/refreshBT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@android:drawable/ic_popup_sync"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="50dp"
-        android:layout_marginEnd="30dp"
-        android:contentDescription="@string/todo" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/bookActionBT"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/book"
-        app:layout_constraintBottom_toTopOf="@id/actionBT"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="20dp"
-        android:layout_marginEnd="30dp"
-        android:contentDescription="@string/todo" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/book"
-        android:text="@string/book"
-        android:textSize="20sp"
-        android:textColor="@color/black"
-        android:layout_marginEnd="11dp"
-        android:layout_marginBottom="56dp"
-        app:layout_constraintBottom_toTopOf="@id/refresh"
-        app:layout_constraintEnd_toStartOf="@id/bookActionBT"/>
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/refresh"
         android:text="@string/refresh"
-        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/bookBT"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="65dp"
-        android:layout_marginEnd="10dp"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@id/actionBT"/>
+        android:contentDescription="@string/todo"
+        android:textColor="@color/black"
+        android:layout_marginBottom="5dp"/>
+
+    <Button
+        android:id="@+id/bookBT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/book_now"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/refreshBT"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="5dp"
+        android:contentDescription="@string/todo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
