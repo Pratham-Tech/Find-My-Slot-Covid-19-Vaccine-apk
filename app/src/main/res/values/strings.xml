@@ -32,6 +32,7 @@
     <string name="age">Age :</string>
     <string name="book_now">Book Now</string>
     <string name="refresh">Refresh</string>
+    <string name="No_slots">No Slots Available</string>
 
 
     <string-array name="states">

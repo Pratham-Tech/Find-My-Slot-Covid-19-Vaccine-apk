@@ -242,7 +242,7 @@
             android:layout_marginTop="30dp"
             android:layout_gravity="center|bottom"
             ads:adSize="BANNER"
-            ads:adUnitId="ca-app-pub-3430847732969236/2883482666">
+            ads:adUnitId="ca-app-pub-3430847732969236/3564033152">
         </com.google.android.gms.ads.AdView>
     </LinearLayout>
 </ScrollView>
