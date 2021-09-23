@@ -1,66 +1,66 @@
 package app.cowin.findmyslot.activities;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.Spinner;
-import android.widget.Toast;
-import androidx.appcompat.app.AppCompatActivity;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import java.util.Objects;
-import app.cowin.findmyslot.R;
-import app.cowin.findmyslot.dataClass.Districts;
-import app.cowin.findmyslot.dataClass.States;
 import static app.cowin.findmyslot.R.id.radioButton1;
 import static app.cowin.findmyslot.R.id.radioButton2;
 import static app.cowin.findmyslot.R.id.radioButton3;
 import static app.cowin.findmyslot.R.id.radioButton4;
+import static app.cowin.findmyslot.activities.fragments.PincodeFragment.pincodeInput;
 
-public class HomeActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
+import app.cowin.findmyslot.R;
+import app.cowin.findmyslot.activities.fragments.DistrictFragment;
+import app.cowin.findmyslot.activities.fragments.PincodeFragment;
+
+public class FindActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
 
     protected String[] vaccineType = {"","",""};
     private RadioGroup radioGroup;
     private RadioGroup radioGroup2;
-    private EditText pincodeInput;
     private CheckBox covaxinCb;
     private CheckBox covishieldCb;
     private CheckBox sputnikCb;
-    private Spinner stateSpinner;
-    private Spinner districtSpinner;
     private RadioButton age18;
     private RadioButton age45;
     private Button findSlots;
     private String Pincode;
-    private String District = "Select District";
-    private String State = "Select State";
-    private String districtID = "0";
+    public static String District = "Select District";
+    public static String State = "Select State";
+    public static String districtID = "0";
     private int age;
     private int ALL_SET = 0;
     private int radioId;
     private Intent intent;
-    private ArrayAdapter<String> districtsAdapter;
+    private TextView UserName;
+    private PincodeFragment pincodeFragment = new PincodeFragment();
+    private DistrictFragment districtFragment = new DistrictFragment();
+
 
     @SuppressLint("NonConstantResourceId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-
-        Objects.requireNonNull(getSupportActionBar()).setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setIcon(R.mipmap.app_icon);
+        setContentView(R.layout.activity_find);
 
         Initialize();
-        intent = new Intent(HomeActivity.this, ResultActivity.class);
+
+        UserName.setText(VerificationActivity.UserName);
+
+        intent = new Intent(FindActivity.this, ResultActivity.class);
 
         AdView mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -74,26 +74,22 @@ public class HomeActivity extends AppCompatActivity implements RadioGroup.OnChec
 
                 case radioButton1:
 
-                    stateSpinner.setVisibility(View.INVISIBLE);
-                    districtSpinner.setVisibility(View.INVISIBLE);
-                    pincodeInput.setVisibility(View.VISIBLE);
+                    this.getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.inputFrame, new PincodeFragment())
+                            .addToBackStack(null).commit();
 
-                    pincodeInput.requestFocus();
                     findSlots.setEnabled(true);
                     radioId = checkedId;
                     break;
 
                 case radioButton2:
 
-                    pincodeInput.setVisibility(View.INVISIBLE);
-                    stateSpinner.setVisibility(View.VISIBLE);
-                    districtSpinner.setVisibility(View.VISIBLE);
-
-                    ArrayAdapter<CharSequence> stateList = ArrayAdapter.createFromResource(this,
-                            R.array.states, R.layout.spinner_text);
-
-                    stateList.setDropDownViewResource(R.layout.spinner_text);
-                    stateSpinner.setAdapter(stateList);
+                    this.getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.inputFrame, new DistrictFragment())
+                            .addToBackStack(null)
+                            .commit();
 
                     findSlots.setEnabled(true);
                     radioId = checkedId;
@@ -131,44 +127,7 @@ public class HomeActivity extends AppCompatActivity implements RadioGroup.OnChec
             }
         });
 
-        stateSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                State = parent.getItemAtPosition(position).toString();
-                States s = new States();
-
-                districtsAdapter = new ArrayAdapter<>(getApplicationContext(),
-                        R.layout.spinner_text, s.getDistricts(position));
-                districtsAdapter.setDropDownViewResource(R.layout.spinner_text);
-
-                districtSpinner.setAdapter(districtsAdapter);
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-                Toast.makeText(getApplicationContext(), "Please select your state"
-                        , Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        districtSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                Districts d = new Districts();
-
-                District = parent.getItemAtPosition(position).toString();
-                districtID = d.getDistrictId(District);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
+//
         covaxinCb.setOnCheckedChangeListener((buttonView, isChecked) -> {
 
             if (covaxinCb.isChecked())
@@ -200,19 +159,14 @@ public class HomeActivity extends AppCompatActivity implements RadioGroup.OnChec
 
         radioGroup = findViewById(R.id.radioGrp);
         radioGroup2 = findViewById(R.id.radioGrp2);
-        pincodeInput = findViewById(R.id.pincodeInput);
-        districtSpinner = findViewById(R.id.listDistrict);
-        stateSpinner = findViewById(R.id.listState);
         findSlots = findViewById(R.id.findSlots);
         covaxinCb = findViewById(R.id.covaxinCB);
         covishieldCb = findViewById(R.id.covishieldCB);
         sputnikCb = findViewById(R.id.sputnikCB);
         age18 = findViewById(radioButton3);
         age45 = findViewById(radioButton4);
+        UserName = findViewById(R.id.userNameView);
 
-        pincodeInput.setVisibility(View.INVISIBLE);
-        stateSpinner.setVisibility(View.INVISIBLE);
-        districtSpinner.setVisibility(View.INVISIBLE);
         findSlots.setEnabled(false);
     }
 

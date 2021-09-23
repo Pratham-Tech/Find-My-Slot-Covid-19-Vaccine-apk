@@ -47,7 +47,6 @@ public class ResultActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Objects.requireNonNull(getSupportActionBar()).hide();
         setContentView(R.layout.activity_result);
 
         Initialize();

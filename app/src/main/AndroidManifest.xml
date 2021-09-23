@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="app.cowin.findmyslot">
+    package="app.cowin.findmyslot" >
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -12,19 +12,23 @@
         android:roundIcon="@mipmap/app_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.FindMySlot"
-        tools:ignore="AllowBackup">
-        <activity android:name="app.cowin.findmyslot.activities.ResultActivity" />
-        <activity android:name="app.cowin.findmyslot.activities.HomeActivity" />
-        <activity android:name="app.cowin.findmyslot.activities.MainActivity">
+        tools:ignore="AllowBackup" >
+        <activity
+            android:name=".activities.VerificationActivity"
+            android:exported="true" />
+        <activity android:name=".activities.ResultActivity" />
+        <activity android:name=".activities.FindActivity" />
+        <activity android:name=".activities.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3430847732969236~7212081237"/>
+            android:value="ca-app-pub-3430847732969236~7212081237" />
     </application>
 
 </manifest>

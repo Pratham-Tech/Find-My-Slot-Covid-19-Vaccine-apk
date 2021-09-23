@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:layout_margin="2dp"
+    android:padding="5sp"
+    android:background="@drawable/gradient_back2">
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:id="@+id/innerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/helloView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Hello, "
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/userNameView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:background="@drawable/name_bg"
+                android:padding="5sp"
+                android:text=""
+                android:textColor="@color/statusBar"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginTop="20dp"
+                android:padding="1sp"
+                android:text="@string/search_by"
+                android:textColor="#008BE3"
+                android:textSize="35sp"
+                android:layout_marginStart="15dp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:id="@+id/layout3"
+                android:orientation="horizontal"
+                android:padding="5sp">
+
+                <RadioGroup
+                    android:id="@+id/radioGrp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_marginTop="25dp"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/radioButton1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="10dp"
+                        android:padding="5sp"
+                        android:text="@string/Pincode"
+                        android:textAlignment="center"
+                        android:textColor="#009ECE"
+                        android:textSize="20sp" />
+
+                    <RadioButton
+                        android:id="@+id/radioButton2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:padding="5sp"
+                        android:text="@string/district"
+                        android:textAlignment="center"
+                        android:textColor="#009ECE"
+                        android:textSize="20sp" />
+
+                </RadioGroup>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/chooseVaccineTX"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_gravity="center"
+                android:text="@string/vaccine_type"
+                android:textAlignment="center"
+                android:textColor="#009ECE"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:id="@+id/layout2"
+                android:layout_marginTop="15dp">
+
+                <CheckBox
+                    android:id="@+id/covaxinCB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/covaxin"
+                    android:textColor="#009ECE"
+                    android:layout_marginEnd="3dp"/>
+
+                <CheckBox
+                    android:id="@+id/covishieldCB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/covishield"
+                    android:textColor="#009ECE"
+                    android:layout_marginEnd="3dp"/>
+
+                <CheckBox
+                    android:id="@+id/sputnikCB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sputnik_v"
+                    android:textColor="#009ECE" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/chooseAge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_gravity="center"
+                android:text="@string/age"
+                android:textAlignment="center"
+                android:textColor="#009ECE"
+                android:textSize="21sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/layout"
+                android:layout_gravity="center">
+
+                            <RadioGroup
+                                android:id="@+id/radioGrp2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:padding="5sp">
+
+                                <RadioButton
+                                    android:id="@+id/radioButton3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginEnd="15dp"
+                                    android:padding="10sp"
+                                    android:text="@string/_18"
+                                    android:textAlignment="center"
+                                    android:textColor="#009ECE"
+                                    android:textSize="20sp" />
+
+                                <RadioButton
+                                    android:id="@+id/radioButton4"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:padding="10sp"
+                                    android:text="@string/_45"
+                                    android:textAlignment="center"
+                                    android:textColor="#009ECE"
+                                    android:textSize="20sp" />
+
+                            </RadioGroup>
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:padding="2sp"
+                android:layout_gravity="center"
+                android:id="@+id/inputFrame"
+                />
+
+            <Button
+                android:id="@+id/findSlots"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="sans-serif-condensed"
+                android:text="@string/find"
+                android:layout_marginTop="15dp"
+                android:textAlignment="center"
+                android:textColor="#009ECE"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+                    <com.google.android.gms.ads.AdView
+                        xmlns:ads="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/adView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        ads:adSize="BANNER"
+                        android:layout_marginTop="10dp"
+                        ads:adUnitId="ca-app-pub-3430847732969236/3564033152">
+                    </com.google.android.gms.ads.AdView>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
+
